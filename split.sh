@@ -18,7 +18,7 @@ while read -r block; do
     if [[ ! -z "$block" ]]; then
         timestamp=$(date '+%y%m%d%H%M')
         content=$(echo "$block" | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//')
-        title=$(echo "$content" | head -n1 | awk '{print $1" "$2" "$3}' | sed 's/[^a-zA-Z0-9_ ]//g' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | tr '[:upper:]' '[:lower:]')
+        title=$(echo "$content" | head -n1 | awk '{print $1" "$2" "$3}' | sed 's/[^a-zA-Z0-9_ ]//g' | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' | tr '[:upper:]' '[:lower:]' | cut -c1-20)
         echo "$content" > "$timestamp-$title.md"
     fi
 done <<< "$blocks"
